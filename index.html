@@ -184,32 +184,24 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
+            Generating realistic 3D dance based on music is a unique and challenging task because real 
+            dance is a free and creative form of artistic expression. Human dance styles are diverse and 
+            ever-changing. Existing methods fail to perform well on out-of-domain music inputs or to generate 
+            movements of new dance styles. Accordingly, in this paper, we propose the Dance Latent Diffusion 
+            Model (DanceLDM), an advanced editable dance generation method for creating realistic and diverse 
+            3D dance movements, while providing a text prompt interface for dance movement editing. Inspired 
+            by the Latent Diffusion Model, we combine a VAE-based motion autoencoder with a Transformer-based 
+            dance diffusion model, where the motion autoencoder extracts human motion features and learns a 
+            low-dimensional latent space, and the dance diffusion model subsequently learns dance motion generation 
+            in this latent space. To generate new and richly diverse dance movements, DanceLDM learns both Text-to-Motion 
+            and Music-to-Dance tasks, to enable effective dance editing guided by text prompts after generating dance from 
+            music. To further improve the rhythm of the generated dance, we incorporate beat signals into the 
+            model to generate more rhythmic dance movements. Experimental results demonstrate that, compared 
+            to existing methods, our proposed model achieves state-of-the-art performance on the Music-to-Dance 
+            generation benchmark and achieves comparable performance on the Text-to-Motion generation task.
+
           </p>
-          <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
-          </p>
-          <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
-          </p>
+          
         </div>
       </div>
     </div>
