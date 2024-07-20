@@ -223,8 +223,8 @@
     <!--/ Paper video. -->
 </section>
 
-  <!-- 新增的用戶輸入表單 -->
-<section class="section">
+  <!-- 生成panorama和bgm(測試用) -->
+<!-- <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -250,8 +250,33 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
   
+  <!-- 生成舞姿 -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Generate Dance</h2>
+        <form id="promptForm" enctype="multipart/form-data">
+          <div class="field">
+            <label class="label" for="file">Upload your music file (mp3):</label>
+            <div class="control">
+              <input class="input" type="file" id="file" name="file" accept=".mp3" required>
+            </div>
+          </div>
+          <div class="control">
+            <button class="button is-link" type="submit">Generate</button>
+          </div>
+        </form>
+        <div id="result" class="content" style="margin-top: 20px;"></div>
+        <div id="loading" style="display: none;">
+          <div class="loader"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
@@ -289,8 +314,8 @@
   </div>
 </footer>
 
-
-<script>
+<!-- 生成panorama和bgm(測試用) -->
+<!-- <script>
 document.getElementById('promptForm').addEventListener('submit', function(event) {
   event.preventDefault();
 
@@ -331,7 +356,48 @@ document.getElementById('promptForm').addEventListener('submit', function(event)
     resultDiv.innerHTML = '<p>An error occurred while generating the result.</p>';
   });
 });
+</script> -->
+
+  <!-- 生成舞姿 -->
+  <script>
+document.getElementById('promptForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const fileInput = document.getElementById('file');
+  const resultDiv = document.getElementById('result');
+  const loadingDiv = document.getElementById('loading');
+
+  const formData = new FormData();
+  formData.append('file', fileInput.files[0]);
+
+  resultDiv.innerHTML = '';
+  loadingDiv.style.display = 'block';
+
+  fetch('http://127.0.0.1:5000/generate', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    loadingDiv.style.display = 'none';
+    resultDiv.innerHTML = `
+      <div>
+        <video controls>
+          <source src="${data.video_url}?${new Date().getTime()}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    `;
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    loadingDiv.style.display = 'none';
+    resultDiv.innerHTML = '<p>An error occurred while generating the result.</p>';
+  });
+});
 </script>
+
+  
   
 </body>
 </html>
