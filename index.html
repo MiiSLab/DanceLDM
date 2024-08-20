@@ -166,7 +166,7 @@
 			<div class="columns is-centered has-text-centered">
 				<div class="column is-four-fifths">
 					<div class="publication-video">
-						<img src="./static/images/danceldm.png" alt="Teaser Image" style="width: 80%" />
+						<img src="./static/images/danceldm.png" alt="Teaser Image" style="width: 100%" />
 					</div>
 				</div>
 			</div>
@@ -237,12 +237,26 @@
 				<div class="column is-four-fifths">
 					<h2 class="title is-3">Framework</h2>
 					<div class="publication-video">
-						<img src="./static/images/method overview.png" alt="Teaser Image" style="width: 80%" />
+						<img src="./static/images/method overview.png" alt="Teaser Image" style="width: 100%" />
 					</div>
 				</div>
 			</div>
 			<!--/ Paper video. -->
 		</section>
+
+    <section class="section">
+      <!-- Paper video. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Framework</h2>
+            <div class="publication-video">
+              <img src="./static/images/method overview.png" alt="Teaser Image" style="width: 80%;">
+            </div>
+          </div>
+        </div>
+        <!--/ Paper video. -->
+    </section>
+
 		<!-- 生成panorama和bgm(測試用) -->
 		<!-- <section class="section">
   <div class="container is-max-desktop">
@@ -580,7 +594,7 @@
   const historyContainer = document.getElementById('historyContainer');
   let currentVideoIndex = 1;
   let audio;
-  let max = 10;  // 初始最大值
+  let max = 10;  
 
   function valueToPercent(value) {
       return ((value - 0) / (max - 0)) * 100;
@@ -601,7 +615,7 @@
       startTimeInput.max = max.toFixed(3);
       endTimeInput.max = max.toFixed(3);
 
-      // 初始化滑块和输入框的值
+      
       startHandle.style.left = valueToPercent(0) + '%';
       endHandle.style.left = valueToPercent(max) + '%';
       startTimeInput.value = 0;
@@ -663,9 +677,9 @@
       const file = e.target.files[0];
       audio = new Audio(URL.createObjectURL(file));
       audio.addEventListener('loadedmetadata', () => {
-          max = audio.duration;  // 更新最大时长
+          max = audio.duration;  
           sliderLabel.innerText = `${max.toFixed(3)} sec`;
-          updateSliderRange();  // 更新滑块范围和输入框最大值
+          updateSliderRange(); 
       });
   });
 
@@ -689,8 +703,7 @@
       const video = document.querySelector('.test-video');
       video.setAttribute('src', './static/videos/test_video1.mp4');
       video.classList.remove('hidden');
-      addVideoToHistory(currentVideoIndex); // 添加当前视频到历史记录
-
+      addVideoToHistory(currentVideoIndex); 
       currentVideoIndex++;
   });
 </script>
@@ -736,3 +749,17 @@
 		</script> -->
 	</body>
 </html>
+
+
+<section class="section">
+  <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Framework</h2>
+        <div class="publication-video">
+          <img src="./static/images/method overview.png" alt="Teaser Image" style="width: 80%;">
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+</section>
