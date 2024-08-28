@@ -393,10 +393,10 @@
 			</div>
 			<div class="loading-modal absolute flex justify-center items-center inset-0 bg-gray-700/90 hidden">
 				<div class="modal-body flex flex-col items-center gap-4">
-					<div class="text-2xl mt-4">Generating....</div>
+					<div class="progress-label text-2xl mt-4">Generating...</div>
 
 					<div class="progress-container w-screen flex items-center justify-center">
-						<div class="w-[70%] lg:w-96 bg-gray-200 rounded-full h-4 mb-4 bg-gray-600">
+						<div class="w-[70%] lg:w-96 bg-gray-200 rounded-full h-4 mb-4 bg-gray-500">
 							<div class="progress h-4 rounded-full bg-gray-100" style="width: 0%"></div>
 						</div>
 					</div>
@@ -564,6 +564,7 @@
 
 			const loadingModal = document.querySelector('.loading-modal');
 			const progressBar = document.querySelector('.progress');
+			const progressLabel = document.querySelector('.progress-label');
 
 			const historyContainer = document.querySelector('.history-container');
 
@@ -578,14 +579,13 @@
 
 			const updateTimeState = (timeSettings) => {
 				if (timeState()) {
-					if (timeSettings.startTime !== null && timeSettings.startTime >= 0 && timeSettings.startTime <= timeState().endTime) {
-						setTimeState((state) => ({ ...state, startTime: timeSettings.startTime }));
-					} else if (
-						timeSettings.endTime !== null &&
-						timeSettings.endTime <= timeState().duration &&
-						timeSettings.endTime >= timeState().startTime
-					) {
-						setTimeState((state) => ({ ...state, endTime: timeSettings.endTime }));
+					if (timeSettings.startTime !== null && timeSettings.startTime <= timeState().endTime) {
+						if (timeSettings.startTime < 0) setTimeState((state) => ({ ...state, startTime: 0 }));
+						else setTimeState((state) => ({ ...state, startTime: timeSettings.startTime }));
+					} else if (timeSettings.endTime !== null && timeSettings.endTime >= timeState().startTime) {
+						if (timeSettings.endTime > timeState().duration)
+							setTimeState((state) => ({ ...state, endTime: timeSettings.duration }));
+						else setTimeState((state) => ({ ...state, endTime: timeSettings.endTime }));
 					} else setTimeState((pre) => pre);
 				}
 			};
@@ -719,6 +719,7 @@
 				const interval = setInterval(() => {
 					generateProgress += intervalMS / timeout;
 					progressBar.style.width = `${generateProgress * 100}%`;
+					progressLabel.innerText = `Generating...\t${parseInt(generateProgress * 100)}%`;
 				}, intervalMS);
 
 				const description = document.querySelector('.description-input').value;
@@ -740,6 +741,8 @@
 				clearInterval(interval);
 
 				progressBar.style.width = `0%`;
+				progressLabel.innerText = `Generating...\t0%`;
+
 				loadingModal.classList.add('hidden');
 				// const { video_url } = responseData;
 				const videoSrc = `./static/videos/test_video${currentVideoIndex}.mp4`;
