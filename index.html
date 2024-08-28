@@ -727,7 +727,11 @@
 				formData.append('sid', sid);
 				formData.append('settings', JSON.stringify({ ...timeState(), description }));
 				try {
-					const responseData = await postMusicToServerTest(formData);
+					// fakeFetch
+					const responseData = await fakeFetch(formData, timeout);
+
+					// real Post
+					// const responseData = await postMusicToServerTest(formData);
 				} catch (error) {
 					console.log(' [debug] error: ', error);
 				}
