@@ -32,7 +32,7 @@
 		<link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
 		<link rel="stylesheet" href="./static/css/index.css" />
-		<link rel="stylesheet" href="./static/css/test.css" />
+		<!-- <link rel="stylesheet" href="./static/css/test.css" /> -->
 		<link rel="icon" href="./static/images/logo.jpg" />
 
 		<!-- tailwindcss -->
@@ -53,7 +53,12 @@
 				},
 			};
 		</script>
-
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"
+			integrity="sha512-11t8Q+vY9JlCrr+PveZKTYJq8n7O09Y5X/pk/aMd3vJugSvu4xOunGEUzaADqL3I8cZKE/pBwwCfXzDkRJh2sQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script defer src="./static/js/fontawesome.all.min.js"></script>
 		<script src="./static/js/bulma-carousel.min.js"></script>
@@ -166,11 +171,12 @@
 			<div class="columns is-centered has-text-centered">
 				<div class="column is-four-fifths">
 					<div class="publication-video">
-						<img src="./static/images/danceldm.png" alt="Teaser Image" style="width: 100%" />
+						<img src="./static/images/danceldm.png" alt="Teaser Image" style="width: 80%" />
 					</div>
 				</div>
 			</div>
 		</section>
+
 		<section class="hero is-light is-small">
 			<div class="hero-body">
 				<div class="container">
@@ -237,73 +243,23 @@
 				<div class="column is-four-fifths">
 					<h2 class="title is-3">Framework</h2>
 					<div class="publication-video">
-						<img src="./static/images/method overview.png" alt="Teaser Image" style="width: 100%" />
+						<img src="./static/images/method overview.png" alt="Teaser Image" style="width: 80%" />
 					</div>
 				</div>
 			</div>
 			<!--/ Paper video. -->
 		</section>
 
- 
-
-		<!-- 生成panorama和bgm(測試用) -->
-		<!-- <section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Generate Dance</h2>
-        <form id="promptForm">
-          <div class="field">
-            <label class="label" for="prompt">Enter your text prompt:</label>
-            <div class="control">
-              <input class="input" type="text" id="prompt" name="prompt" required>
-            </div>
-          </div>
-          <div class="control">
-            <button class="button is-link" type="submit">Generate</button>
-          </div>
-        </form>
-        <div id="result" class="content" style="margin-top: 20px;"></div>
-        <div id="loading" style="display: none;">
-          <div class="loader"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
 		<!-- todo:  ------------------------------------------------------------------------------------------------------------------------------------------------- -->
-		<!-- todo:  ------------------------------------------------------------------------------------------------------------------------------------------------- -->
-		<!-- todo:  ------------------------------------------------------------------------------------------------------------------------------------------------- -->
-		<!-- todo:  ------------------------------------------------------------------------------------------------------------------------------------------------- -->
-		<section class="bg-bg px-2 py-2 lg:!px-4 lg:!py-8 text-white flex items-center justify-between">
-			<div class="view flex flex-col w-full h-full bg-nav rounded-md p-4 lg:!p-8">
+		<section class="bg-bg px-2 py-2 lg:!px-4 lg:!py-8 text-white relative items-center justify-center h-fit">
+			<div class="flex flex-col w-full h-full bg-nav rounded-md p-4 lg:!p-8">
 				<nav class="flex lg:!p-5">
 					<div class="lg:px-20 text-2xl lg:text-4xl text-white flex items-center">DanceLDM</div>
-					<div class="links flex flex-1 justify-end">
-						<ul class="flex gap-1 lg:gap-5 text-lg">
-							<li class="cursor-pointer flex items-center">
-								<i class="fab fa-twitter"></i>
-							</li>
-							<li class="cursor-pointer flex items-center">
-								<i class="fab fa-twitter"></i>
-							</li>
-							<li class="cursor-pointer flex items-center">
-								<i class="fab fa-twitter"></i>
-							</li>
-							<li class="cursor-pointer flex items-center">
-								<i class="fab fa-twitter"></i>
-							</li>
-							<li class="cursor-pointer flex items-center">
-								<i class="fab fa-twitter"></i>
-							</li>
-						</ul>
-					</div>
 				</nav>
 
 				<form id="promptForm" enctype="multipart/form-data">
-					<div class="py-10 px-4 bg-container flex flex-col lg:flex-row flex-1 rounded-md">
-						<div class="container-left lg:px-6 flex flex-1 flex-col">
+					<div class="py-10 px-4 bg-container grid grid-cols-1 lg:grid-cols-2 rounded-md">
+						<div class="container-left lg:px-6 flex flex-col">
 							<div class="upload">
 								<div class="flex h-fit mb-8 items-center text-xl font-bold">
 									<div class="w-1 h-7 me-2 rounded-md bg-gradient-to-b from-[#6887BF] to-[#945F9F]"></div>
@@ -311,104 +267,99 @@
 								</div>
 								<div class="flex gap-10">
 									<div class="">
-										<label
-											for="file"
-											class="btn-upload flex px-9 py-2 gap-2 cursor-pointer active:bg-violet-500/90 bg-btn rounded-sm items-center"
-											><i class="fas fa-upload"></i>Upload Music</label
-										>
-										<input id="file" type="file" class="hidden" />
+										<label for="file" class="flex gap-2 items-center">
+											<div
+												class="btn-upload flex px-9 py-2 gap-2 cursor-pointer active:bg-violet-500/90 bg-btn rounded-sm items-center"
+											>
+												<i class="fas fa-upload"></i>Upload Music
+												<input id="file" type="file" accept=".mp3" class="hidden" />
+											</div>
+											<div class="filename-text"></div>
+										</label>
 									</div>
-
-									<!-- <div
-										class="flex w-10 items-center justify-center cursor-pointer bg-slate-200 rounded-full text-slate-600"
-									>
-										<i class="fas fa-play"></i>
-									</div> -->
 								</div>
 							</div>
-							<div class="video-container flex flex-col flex-1 mt-8 p-4 bg-video-container rounded-md">
-								<div class="pb-4 text-lg font-semibold items-center">Dance Video</div>
-								<div class="bg-video rounded-md items-center justify-center flex as">
-									<!-- <img class=' h-full p-2' src='https://hackmd.io/_uploads/S143dQKcR.png' alt='' /> -->
-									<video src="" class="test-video aspect-[4/3] hidden" controls></video>
-									<!-- <video src='./static/videos/test_video1.mp4' class='test-video h-full' controls ></video> -->
+							<div class="video-container flex flex-col mt-8 p-4 bg-video-container rounded-md">
+								<div class="video-title pb-4 text-lg font-semibold items-center">Dance Video</div>
+								<div class="bg-video rounded-md items-center justify-center flex aspect-video">
+									<video src="" class="dance-video hidden" controls></video>
 								</div>
 							</div>
 						</div>
-						<div class="container-right lg:px-6 mt-8 lg:mt-0 flex-1">
-							<div class="edit">
+						<div class="container-right mt-8 lg:mt-0 lg:px-6 flex flex-col">
+							<div class="edit w-full">
 								<div class="flex h-fit mb-8 items-center text-xl font-bold">
 									<div class="w-1 h-7 me-2 rounded-md bg-gradient-to-b from-[#6887BF] to-[#945F9F]"></div>
 									Edit Dance
 								</div>
 								<div class="setting mb-5">
-                  <div class="description mb-2">Edit times Setting</div>
-                  <div class="slider flex items-center gap-2">
-                      <div class="slider-container">
-                          <div class="slider-track">
-                              <div id="startHandle" class="slider-handle"></div>
-                              <div id="endHandle" class="slider-handle"></div>
-                          </div>
-                      </div>
-                      <p class="slider-label text-sm">10sec</p>
-                  </div>
-              </div>
+									<div class="description mb-2">Edit times Setting</div>
+									<div class="slider flex items-center gap-2">
+										<div class="slider-track-container">
+											<div class="slider-track">
+												<div id="startHandle" class="slider-handle opacity-0"></div>
+												<div id="endHandle" class="slider-handle opacity-0"></div>
+											</div>
+										</div>
+										<div class="slider-label text-nowrap text-sm"></div>
+									</div>
+								</div>
 
-              <div class="flex gap-4 mb-5">
-                <!-- Start Time -->
-                <div class="setting flex-1">
-                    <label class="description">
-                        Start Time
-                        <div class="time-input mt-2 flex gap-1">
-                            <div class="flex-1 flex gap-1">
-                                <input
-                                    min="0"
-                                    type="number"
-                                    value="0"
-                                    id="startTime"
-                                    step="0.001"
-                                    class="number-input bg-gray-700 p-2 text-slate-200 w-full"
-                                />
-                                <div class="flex flex-col gap-1">
-                                    <div class="arrow flex-1 bg-gray-700 px-1">
-                                        <i class="fas fa-chevron-up"></i>
-                                    </div>
-                                    <div class="arrow flex-1 bg-gray-700 px-1">
-                                        <i class="fas fa-chevron-down"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-            
-                <!-- End Time -->
-                <div class="setting flex-1">
-                    <label class="description">
-                        End Time
-                        <div class="time-input mt-2 flex gap-1">
-                            <div class="flex-1 flex gap-1">
-                                <input
-                                    min="0"
-                                    type="number"
-                                    value="2"
-                                    id="endTime"
-                                    step="0.001"
-                                    class="number-input bg-gray-700 p-2 text-slate-200 w-full"
-                                />
-                                <div class="flex flex-col gap-1">
-                                    <div class="arrow flex-1 bg-gray-700 px-1">
-                                        <i class="fas fa-chevron-up"></i>
-                                    </div>
-                                    <div class="arrow flex-1 bg-gray-700 px-1">
-                                        <i class="fas fa-chevron-down"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-            </div>
+								<div class="flex gap-4 mb-5">
+									<div class="setting flex-1">
+										<label class="description">
+											Start Time
+											<div class="time-input mt-2 flex gap-1">
+												<div class="flex-1 flex gap-1">
+													<input
+														min="0"
+														type="number"
+														value="0"
+														id="startTime"
+														step="0.001"
+														disabled
+														class="number-input bg-gray-700 p-2 text-slate-200 w-full"
+													/>
+													<div class="flex flex-col gap-1">
+														<div class="increase-startTime-btn arrow flex-1 bg-gray-700 px-1">
+															<i class="fas fa-chevron-up"></i>
+														</div>
+														<div class="decrease-startTime-btn arrow flex-1 bg-gray-700 px-1">
+															<i class="fas fa-chevron-down"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</label>
+									</div>
+									<!--  -->
+									<div class="setting flex-1">
+										<label class="description">
+											End Time
+											<div class="time-input mt-2 flex gap-1">
+												<div class="flex-1 flex gap-1">
+													<input
+														min="0"
+														type="number"
+														value="0"
+														id="endTime"
+														step="0.001"
+														disabled
+														class="number-input bg-gray-700 p-2 text-slate-200 w-full"
+													/>
+													<div class="flex flex-col gap-1">
+														<div class="increase-endTime-btn arrow flex-1 bg-gray-700 px-1">
+															<i class="fas fa-chevron-up"></i>
+														</div>
+														<div class="decrease-endTime-btn arrow flex-1 bg-gray-700 px-1">
+															<i class="fas fa-chevron-down"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</label>
+									</div>
+								</div>
 
 								<div class="setting mb-5">
 									<div class="description mb-2">Action Description</div>
@@ -416,7 +367,7 @@
 										<input
 											type="text"
 											placeholder="Please enter action description"
-											class="flex-1 bg-gray-700 p-2 text-slate-200 active:ring-0"
+											class="description-input flex-1 bg-gray-700 p-2 text-slate-200 active:ring-0"
 										/>
 									</div>
 								</div>
@@ -429,26 +380,46 @@
 									/>
 								</div>
 							</div>
-							<div class="history mt-10">
+							<div class="history mt-10 w-full">
 								<div class="flex h-fit mb-8 items-center text-xl font-bold">
 									<div class="w-1 h-7 me-2 rounded-md bg-gradient-to-b from-[#6887BF] to-[#945F9F]"></div>
 									History
 								</div>
-                <div id="historyContainer" class="history-container"></div>
-								<div></div>
+								<div id="historyContainer" class="history-container flex flex-wrap gap-4 pb-4"></div>
 							</div>
 						</div>
 					</div>
 				</form>
 			</div>
+			<div class="loading-modal absolute flex justify-center items-center inset-0 bg-gray-700/90 hidden">
+				<div class="modal-body flex flex-col items-center gap-4">
+					<div class="text-2xl mt-4">Generating....</div>
+
+					<div class="progress-container w-screen flex items-center justify-center">
+						<div class="w-[70%] lg:w-96 bg-gray-200 rounded-full h-4 mb-4 bg-gray-600">
+							<div class="progress h-4 rounded-full bg-gray-100" style="width: 0%"></div>
+						</div>
+					</div>
+
+					<!-- circle -->
+					<!-- <div
+						class="inline-block h-16 w-16 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+						role="status"
+					>
+						<span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+							>Generating...</span
+						>
+					</div> -->
+				</div>
+			</div>
 		</section>
 
 		<!-- 生成舞姿 -->
-		<section class="section">
+		<!-- <section class="section">
 			<div class="container is-max-desktop">
 				<div class="columns is-centered has-text-centered">
 					<div class="column is-four-fifths">
-						<h2 class="title is-3">Generate Dance 12313</h2>
+						<h2 class="title is-3">Generate Dance</h2>
 						<form id="promptForm" enctype="multipart/form-data">
 							<div class="field">
 								<label class="label" for="file">Upload your music file (mp3):</label>
@@ -467,10 +438,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
-		<!-- todo:  ------------------------------------------------------------------------------------------------------------------------------------------------- -->
-		<!-- todo:  ------------------------------------------------------------------------------------------------------------------------------------------------- -->
-		<!-- todo:  ------------------------------------------------------------------------------------------------------------------------------------------------- -->
+		</section> -->
 		<!-- todo:  ------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 		<footer class="footer">
@@ -551,13 +519,14 @@
 		<!-- !生成舞姿 changed-->
 		<!-- info: State Manager   -->
 		<script>
-			const createState = (initialState) => {
+			function createState(initialState) {
 				let state = initialState;
 				const listeners = [];
 				const getState = () => state;
 				const setState = (updater) => {
 					if (typeof updater === 'function') state = updater(state);
 					else state = updater;
+
 					listeners.forEach((listener) => listener(state));
 				};
 				const subscribe = (listener) => {
@@ -568,176 +537,245 @@
 					};
 				};
 				return [getState, setState, subscribe];
-			};
+			}
+
+			const waitForTimeout = (millisecond) => new Promise((resolve) => setTimeout(resolve, millisecond));
+			async function fakeFetch(request, timeout) {
+				await waitForTimeout(timeout);
+				const responseData = { msg: 'done' };
+				return responseData;
+			}
 		</script>
 
-<script>
-  const fileUploadInput = document.querySelector('#file');
-  const sliderLabel = document.querySelector('.slider-label');
-  const startTimeInput = document.getElementById('startTime');
-  const endTimeInput = document.getElementById('endTime');
-  const sliderTrack = document.querySelector('.slider-track');
-  const startHandle = document.getElementById('startHandle');
-  const endHandle = document.getElementById('endHandle');
-  const videoElement = document.querySelector('.test-video');
-  const historyContainer = document.getElementById('historyContainer');
-  let currentVideoIndex = 1;
-  let audio;
-  let max = 10;  
+		<!-- API test -->
 
-  function valueToPercent(value) {
-      return ((value - 0) / (max - 0)) * 100;
-  }
+		<script>
+			const fileUploadInput = document.querySelector('#file');
+			const sliderLabel = document.querySelector('.slider-label');
+			const startTimeInput = document.querySelector('#startTime');
+			const endTimeInput = document.querySelector('#endTime');
+			const sliderTrack = document.querySelector('.slider-track');
+			const startHandle = document.querySelector('#startHandle');
+			const endHandle = document.querySelector('#endHandle');
+			const danceVideo = document.querySelector('.dance-video');
+			const danceVideoTitle = document.querySelector('.video-title');
+			const filenameText = document.querySelector('.filename-text');
+			const promptForm = document.getElementById('promptForm');
 
-  function percentToValue(percent) {
-      return (percent * (max - 0)) / 100 + 0;
-  }
+			const loadingModal = document.querySelector('.loading-modal');
+			const progressBar = document.querySelector('.progress');
 
-  function updateSliderTrack() {
-      const startPercent = parseFloat(startHandle.style.left);
-      const endPercent = parseFloat(endHandle.style.left);
+			const historyContainer = document.querySelector('.history-container');
 
-      sliderTrack.style.background = `linear-gradient(to right, #ddd ${startPercent}%, #4CAF50 ${startPercent}%, #4CAF50 ${endPercent}%, #ddd ${endPercent}%)`;
-  }
+			const increaseStartTimeBtn = document.querySelector('.increase-startTime-btn'); // increase-startTime-btn
+			const decreaseStartTimeBtn = document.querySelector('.decrease-startTime-btn'); // decrease-startTime-btn
+			const increaseEndTimeBtn = document.querySelector('.increase-endTime-btn'); // increase-endTime-btn
+			const decreaseEndTimeBtn = document.querySelector('.decrease-endTime-btn'); // decrease-endTime-btn
 
-  function updateSliderRange() {
-      startTimeInput.max = max.toFixed(3);
-      endTimeInput.max = max.toFixed(3);
+			const [timeState, setTimeState, timeSubscribe] = createState(null);
 
-      
-      startHandle.style.left = valueToPercent(0) + '%';
-      endHandle.style.left = valueToPercent(max) + '%';
-      startTimeInput.value = 0;
-      endTimeInput.value = max.toFixed(3);
+			let file;
 
-      updateSliderTrack();
-  }
+			const updateTimeState = (timeSettings) => {
+				if (timeState()) {
+					if (timeSettings.startTime !== null && timeSettings.startTime >= 0 && timeSettings.startTime <= timeState().endTime) {
+						setTimeState((state) => ({ ...state, startTime: timeSettings.startTime }));
+					} else if (
+						timeSettings.endTime !== null &&
+						timeSettings.endTime <= timeState().duration &&
+						timeSettings.endTime >= timeState().startTime
+					) {
+						setTimeState((state) => ({ ...state, endTime: timeSettings.endTime }));
+					} else setTimeState((pre) => pre);
+				}
+			};
+			const dragHandle = (handle, isStart) => {
+				handle.classList.remove('opacity-0');
+				handle.classList.add('cursor-pointer');
+				handle.onmousedown = function (event) {
+					event.preventDefault();
+					document.onmousemove = function (event) {
+						const rect = sliderTrack.getBoundingClientRect();
+						let rate = (event.clientX - rect.left) / rect.width;
 
-  function syncInputsWithHandles() {
-      startTimeInput.value = percentToValue(parseFloat(startHandle.style.left)).toFixed(3);
-      endTimeInput.value = percentToValue(parseFloat(endHandle.style.left)).toFixed(3);
-  }
+						if (rate < 0) rate = 0;
+						if (rate > 1) rate = 1;
 
-  function syncHandlesWithInputs() {
-      startHandle.style.left = valueToPercent(parseFloat(startTimeInput.value)) + '%';
-      endHandle.style.left = valueToPercent(parseFloat(endTimeInput.value)) + '%';
-      updateSliderTrack();
-  }
+						if (isStart) updateTimeState({ startTime: rate * timeState().duration });
+						else updateTimeState({ endTime: rate * timeState().duration });
+					};
 
-  function dragHandle(handle, otherHandle, isStart) {
-      handle.onmousedown = function(event) {
-          event.preventDefault();
+					document.onmouseup = function () {
+						document.onmousemove = null;
+						document.onmouseup = null;
+					};
+				};
+			};
 
-          document.onmousemove = function(event) {
-              const rect = sliderTrack.getBoundingClientRect();
-              let percent = ((event.clientX - rect.left) / rect.width) * 100;
+			fileUploadInput.addEventListener('change', (e) => {
+				file = e.target.files[0];
+				const { name } = file;
+				filenameText.innerText = name;
+				const audio = new Audio(URL.createObjectURL(file));
+				audio.addEventListener('loadedmetadata', () => {
+					timeSettings = { duration: audio.duration.toFixed(3), startTime: 0, endTime: audio.duration.toFixed(3) };
+					sliderLabel.innerText = `${timeSettings.duration} sec`;
+					startTimeInput.setAttribute('max', timeSettings.duration);
+					endTimeInput.setAttribute('max', timeSettings.duration);
 
-              if (isStart) {
-                  if (percent < 0) percent = 0;
-                  if (percent > parseFloat(otherHandle.style.left)) {
-                      percent = parseFloat(otherHandle.style.left);
-                  }
-              } else {
-                  if (percent > 100) percent = 100;
-                  if (percent < parseFloat(otherHandle.style.left)) {
-                      percent = parseFloat(otherHandle.style.left);
-                  }
-              }
+					startTimeInput.removeAttribute('disabled');
+					endTimeInput.removeAttribute('disabled');
 
-              handle.style.left = percent + '%';
-              updateSliderTrack();
-              syncInputsWithHandles();
-          };
+					dragHandle(startHandle, true);
+					dragHandle(endHandle, false);
 
-          document.onmouseup = function() {
-              document.onmousemove = null;
-              document.onmouseup = null;
-          };
-      };
-  }
+					const step = 0.01;
 
-  dragHandle(startHandle, endHandle, true);
-  dragHandle(endHandle, startHandle, false);
-
-  startTimeInput.addEventListener('input', syncHandlesWithInputs);
-  endTimeInput.addEventListener('input', syncHandlesWithInputs);
-
-  fileUploadInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      audio = new Audio(URL.createObjectURL(file));
-      audio.addEventListener('loadedmetadata', () => {
-          max = audio.duration;  
-          sliderLabel.innerText = `${max.toFixed(3)} sec`;
-          updateSliderRange(); 
-      });
-  });
-
-  function addVideoToHistory(videoIndex) {
-        const videoIcon = document.createElement('div');
-        videoIcon.classList.add('video-icon');
-        videoIcon.innerHTML = `<i class="fas fa-video"></i> Video ${videoIndex}`;
-        videoIcon.style.cursor = 'pointer';
-
-        videoIcon.addEventListener('click', () => {
-            const videoSrc = `./static/videos/test_video${videoIndex}.mp4`;
-            videoElement.setAttribute('src', videoSrc);
-            videoElement.classList.remove('hidden');
-        });
-
-        historyContainer.appendChild(videoIcon);
-    }
-
-  document.getElementById('promptForm').addEventListener('submit', function (event) {
-      event.preventDefault();
-      const video = document.querySelector('.test-video');
-      video.setAttribute('src', './static/videos/test_video1.mp4');
-      video.classList.remove('hidden');
-      addVideoToHistory(currentVideoIndex); 
-      currentVideoIndex++;
-  });
-</script>
-
-
-		<!-- 生成舞姿 -->
-		<!-- <script>
-			document.getElementById('promptForm').addEventListener('submit', function (event) {
-				event.preventDefault();
-
-				const fileInput = document.getElementById('file');
-				const resultDiv = document.getElementById('result');
-				const loadingDiv = document.getElementById('loading');
-
-				const formData = new FormData();
-				formData.append('file', fileInput.files[0]);
-
-				resultDiv.innerHTML = '';
-				loadingDiv.style.display = 'block';
-
-				fetch('http://127.0.0.1:5000/generate', {
-					method: 'POST',
-					body: formData,
-				})
-					.then((response) => response.json())
-					.then((data) => {
-						loadingDiv.style.display = 'none';
-						resultDiv.innerHTML = `
-        <div>
-          <video controls>
-            <source src="${data.video_url}?${new Date().getTime()}" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      `;
-					})
-					.catch((error) => {
-						console.error('Error:', error);
-						loadingDiv.style.display = 'none';
-						resultDiv.innerHTML = '<p>An error occurred while generating the result.</p>';
+					increaseStartTimeBtn.classList.add('cursor-pointer');
+					increaseStartTimeBtn.addEventListener('click', () => {
+						updateTimeState({ startTime: timeState().startTime + step });
 					});
+
+					decreaseStartTimeBtn.classList.add('cursor-pointer');
+					decreaseStartTimeBtn.addEventListener('click', () => {
+						updateTimeState({ startTime: timeState().startTime - step });
+					});
+
+					increaseEndTimeBtn.classList.add('cursor-pointer');
+					increaseEndTimeBtn.addEventListener('click', () => {
+						updateTimeState({ endTime: timeState().endTime + step });
+					});
+
+					decreaseEndTimeBtn.classList.add('cursor-pointer');
+					decreaseEndTimeBtn.addEventListener('click', () => {
+						updateTimeState({ endTime: timeState().endTime - step });
+					});
+
+					startTimeInput.addEventListener('input', (event) => {
+						updateTimeState({ startTime: parseFloat(event.target.value) });
+					});
+
+					endTimeInput.addEventListener('input', (event) => {
+						updateTimeState({ endTime: parseFloat(event.target.value) });
+					});
+
+					setTimeState(timeSettings);
+				});
 			});
-		</script> -->
+
+			const updateUI = (state) => {
+				startTimeInput.value = parseFloat(state.startTime).toFixed(3);
+				endTimeInput.value = parseFloat(state.endTime).toFixed(3);
+
+				const startPercent = (state.startTime / state.duration) * 100;
+				const endPercent = (state.endTime / state.duration) * 100;
+
+				const bgc = '#ddd';
+				const color = '#4b83cf';
+
+				sliderTrack.style.background = `linear-gradient(to right, ${bgc} ${startPercent}%, ${color} ${startPercent}%, ${color} ${endPercent}%, ${bgc} ${endPercent}%)`;
+				startHandle.style.left = startPercent + '%';
+				endHandle.style.left = endPercent + '%';
+			};
+
+			timeSubscribe(updateUI);
+
+			const addVideoToHistory = (videoIndex) => {
+				const videoIcon = document.createElement('div');
+				const videoSrc = `./static/videos/test_video${videoIndex}.mp4`;
+				const routes = videoSrc.split('/');
+				const name = routes[routes.length - 1];
+
+				videoIcon.className = 'history-item w-14 cursor-pointer';
+				videoIcon.innerHTML = `
+				<div class="h-14 flex justify-center items-center bg-btn rounded-md">
+					<i class="fas fa-video"></i>
+				</div>
+				<div class="history-item-name mt-2 text-xs text-center w-full break-words">${name}</div>`;
+
+				videoIcon.addEventListener('click', () => {
+					danceVideo.setAttribute('src', videoSrc);
+					danceVideoTitle.innerText = 'Dance video: ' + name;
+					// danceVideo.classList.remove('hidden');
+				});
+				historyContainer.appendChild(videoIcon);
+			};
+
+			let currentVideoIndex = 1;
+
+			promptForm.addEventListener('submit', async (event) => {
+				event.preventDefault();
+				if (timeState() == null) {
+					alert('[test] no any music upload!');
+					return;
+				}
+
+				loadingModal.classList.remove('hidden');
+
+				// fake progress
+				const timeout = 3000;
+				const intervalMS = 100;
+				let generateProgress = 0;
+				const interval = setInterval(() => {
+					generateProgress += intervalMS / timeout;
+					progressBar.style.width = `${generateProgress * 100}%`;
+				}, intervalMS);
+
+				const description = document.querySelector('.description-input').value;
+				const formData = new FormData();
+				formData.append('file', file);
+				formData.append('sid', sid);
+				formData.append('settings', JSON.stringify({ ...timeState(), description }));
+				try {
+					const responseData = await postMusicToServerTest(formData);
+				} catch (error) {
+					console.log(' [debug] error: ', error);
+				}
+
+				// fake progress
+				clearInterval(interval);
+
+				progressBar.style.width = `0%`;
+				loadingModal.classList.add('hidden');
+				// const { video_url } = responseData;
+				const videoSrc = `./static/videos/test_video${currentVideoIndex}.mp4`;
+				const routes = videoSrc.split('/');
+				danceVideo.setAttribute('src', videoSrc);
+				danceVideoTitle.innerText = 'Dance video: ' + routes[routes.length - 1];
+				danceVideo.classList.remove('hidden');
+				addVideoToHistory(currentVideoIndex);
+				currentVideoIndex++;
+			});
+		</script>
+		<script>
+			const HOST = 'http://127.0.0.1:5001';
+			let sid;
+
+			// const socket = io(HOST);
+			// // socket.emit('join', { room: room });
+			// socket.on('join', (data) => {
+			// 	console.log(' [debug] data.sid: ', data.sid);
+			// 	sid = data.sid;
+			// });
+			// socket.on('progress_update', ({ progress }) => {
+			// 	// real progress
+			// 	progressBar.style.width = `${progress * 100}%`;
+			// 	console.log('Progress:', progress);
+			// });
+
+			// socket.on('connect', () => {
+			// 	console.log('Connected to WebSocket server');
+			// });
+			// socket.on('disconnect', () => {
+			// 	console.log('Disconnected from WebSocket server');
+			// });
+
+			const postMusicToServerTest = async (formData) => {
+				const response = await fetch(HOST + '/test', { method: 'POST', body: formData });
+				const responseData = await response.json();
+				console.log(' [debug] response: ', responseData);
+				return {};
+			};
+		</script>
 	</body>
 </html>
-
-
-
