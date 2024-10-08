@@ -389,8 +389,8 @@
 									<div class="slider flex items-center gap-2">
 										<div class="slider-track-container">
 											<div class="slider-track">
-												<div id="startHandle" class="p-3 absolute -translate-x-1/2 slider-handle opacity-0"></div>
-												<div id="endHandle" class="p-3 absolute -translate-x-1/2 slider-handle opacity-0"></div>
+												<div id="startHandle" class="absolute -translate-x-1/2 slider-handle opacity-0"></div>
+												<div id="endHandle" class="absolute -translate-x-1/2 slider-handle opacity-0"></div>
 											</div>
 										</div>
 										<div class="slider-label text-nowrap text-sm"></div>
@@ -486,45 +486,8 @@
 					</div>
 				</form>
 			</div>
-			<div class="loading-skeleton absolute flex justify-center items-center inset-0 bg-gray-700/90 hidden">
-				<!-- <div class="modal-body flex flex-col items-center gap-4">
-					<div class="progress-label text-2xl mt-4">Generating...</div>
-					<div class="progress-container w-screen flex items-center justify-center">
-						<div class="w-[70%] lg:w-96 bg-gray-200 rounded-full h-4 mb-4 bg-gray-500">
-							<div class="progress h-4 rounded-full bg-gray-100" style="width: 0%"></div>
-						</div>
-					</div>
-				</div> -->
-			</div>
+			<div class="loading-skeleton absolute flex justify-center items-center inset-0 bg-gray-700/90 hidden"></div>
 		</section>
-
-		<!-- 生成舞姿 -->
-		<!-- <section class="section">
-			<div class="container is-max-desktop">
-				<div class="columns is-centered has-text-centered">
-					<div class="column is-four-fifths">
-						<h2 class="title is-3">Generate Dance</h2>
-						<form id="promptForm" enctype="multipart/form-data">
-							<div class="field">
-								<label class="label" for="file">Upload your music file (mp3):</label>
-								<div class="control">
-									<input class="input" type="file" id="file" name="file" accept=".mp3" required />
-								</div>
-							</div>
-							<div class="control">
-								<button class="button is-link" type="submit">Generate</button>
-							</div>
-						</form>
-						<div id="result" class="content" style="margin-top: 20px"></div>
-						<div id="loading" style="display: none">
-							<div class="loader"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section> -->
-		<!-- todo:  ------------------------------------------------------------------------------------------------------------------------------------------------- -->
-
 		<div class="alert-container fixed top-10 left-1/2 -translate-x-1/2 -z-1 flex flex-col items-center gap-4"></div>
 		<footer class="footer">
 			<div class="container">
@@ -556,49 +519,6 @@
 			</div>
 		</footer>
 
-		<!-- 生成panorama和bgm(測試用) -->
-		<!-- <script>
-			document.getElementById('promptForm').addEventListener('submit', function (event) {
-				event.preventDefault();
-
-				const prompt = document.getElementById('prompt').value;
-				const resultDiv = document.getElementById('result');
-				const loadingDiv = document.getElementById('loading');
-
-				// 清空之前的結果
-				resultDiv.innerHTML = '';
-				loadingDiv.style.display = 'block';
-
-				fetch('http://127.0.0.1:5000/generate', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({ prompt: prompt }),
-				})
-					.then((response) => response.json())
-					.then((data) => {
-						// 隱藏加載動畫並顯示結果
-						loadingDiv.style.display = 'none';
-						resultDiv.innerHTML = `
-      <div>
-        <img src="${data.image_url}?${new Date().getTime()}" alt="Generated Panorama">
-      </div>
-      <div>
-        <audio controls>
-          <source src="${data.music_url}?${new Date().getTime()}" type="audio/wav">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-    `;
-					})
-					.catch((error) => {
-						console.error('Error:', error);
-						loadingDiv.style.display = 'none';
-						resultDiv.innerHTML = '<p>An error occurred while generating the result.</p>';
-					});
-			});
-		</script> -->
 		<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 		<script>
 			const alertContainer = document.querySelector('.alert-container');
@@ -1061,11 +981,10 @@
 					console.error(' [debug] error: ', error);
 					showError('Error', 'Failed to connect to server.');
 				}
-				skeletonProgressBar.style.width = `0%`;
-				skeletonProgressLabel.innerText = `Generating...\t0%`;
+				console.log(' [debug] reset progress: ');
+				progressUpdate(0, 'skeleton');
+				progressUpdate(0, 'avatar');
 				loadingSkeletonModal.classList.add('hidden');
-				avatarProgressBar.style.width = `0%`;
-				avatarProgressLabel.innerText = `Generating...\t0%`;
 				loadingAvatarModal.classList.add('hidden');
 			});
 			function toggleQuality() {
@@ -1093,9 +1012,9 @@
 			// const HOST = 'https://native-oarfish-highly.ngrok-free.app';
 			const LOCALHOST = 'http://127.0.0.1:8443';
 			const HOST = 'https://miislab.pagekite.me/';
-			const host =
-				window.location.host === 'gaozhengting3.github.io' || window.location.host === 'miislab.github.io' ? HOST : LOCALHOST;
-			// const host = HOST;
+			// const host =
+			// 	window.location.host === 'gaozhengting3.github.io' || window.location.host === 'miislab.github.io' ? HOST : LOCALHOST;
+			const host = HOST;
 			console.log(' [debug] host: ', host);
 			let sid;
 
