@@ -4,15 +4,15 @@
 		<meta charset="utf-8" />
 		<meta
 			name="description"
-			content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos."
+			content="DanceLDM: Latent-based diffusion model for dance generation and editing conditioned on music and text prompt."
 		/>
-		<meta name="keywords" content="Nerfies, D-NeRF, NeRF" />
+		<meta name="keywords" content="DanceLDM, diffusion" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>DanceLDM: Latent-based diffusion model for dance generation and editing conditioned on music and text prompt</title>
 
 		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-		<script>
+		<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
+		<!-- <script>
 			window.dataLayer = window.dataLayer || [];
 
 			function gtag() {
@@ -22,7 +22,7 @@
 			gtag('js', new Date());
 
 			gtag('config', 'G-PYVRSFMDRL');
-		</script>
+		</script> -->
 
 		<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
 
@@ -86,15 +86,15 @@
 							</h1>
 							<div class="is-size-5 publication-authors">
 								<span class="author-block">
-									<a href="https://sites.google.com/view/ntust-miislab">Ming-Cong Su</a><sup>1</sup>,</span
+									<a href="https://sites.google.com/view/ntust-miislab">Ming-Cong Su</a><sup>1</sup></span
 								>
-								<span class="author-block">
+								<!-- <span class="author-block">
 									<a href="https://sites.google.com/view/ntust-miislab">Tse-Yu Pan</a><sup>2</sup>,</span
-								>
+								> -->
 
 								<div class="is-size-5 publication-authors">
-									<span class="author-block"><sup>1</sup>National Taiwan University of Science and Technology,</span>
-									<span class="author-block"><sup>2</sup>MiiSLab</span>
+									<!-- <span class="author-block"><sup>1</sup>National Taiwan University of Science and Technology,</span> -->
+									<!-- <span class="author-block"><sup>2</sup>MiiSLab</span> -->
 								</div>
 
 								<div class="column has-text-centered">
@@ -102,7 +102,7 @@
 										<!-- PDF Link. -->
 										<span class="link-block">
 											<a
-												href="https://arxiv.org/pdf/2011.12948"
+												href="https://sites.google.com/view/ntust-miislab"
 												class="external-link button is-normal is-rounded is-dark"
 											>
 												<span class="icon">
@@ -113,7 +113,7 @@
 										</span>
 										<span class="link-block">
 											<a
-												href="https://arxiv.org/abs/2011.12948"
+												href="https://sites.google.com/view/ntust-miislab"
 												class="external-link button is-normal is-rounded is-dark"
 											>
 												<span class="icon">
@@ -125,7 +125,7 @@
 										<!-- Video Link. -->
 										<span class="link-block">
 											<a
-												href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+												href="https://sites.google.com/view/ntust-miislab"
 												class="external-link button is-normal is-rounded is-dark"
 											>
 												<span class="icon">
@@ -137,7 +137,7 @@
 										<!-- Code Link. -->
 										<span class="link-block">
 											<a
-												href="https://github.com/google/nerfies"
+												href="https://sites.google.com/view/ntust-miislab"
 												class="external-link button is-normal is-rounded is-dark"
 											>
 												<span class="icon">
@@ -147,7 +147,7 @@
 											</a>
 										</span>
 										<!-- Dataset Link. -->
-										<span class="link-block">
+										<!-- <span class="link-block">
 											<a
 												href="https://github.com/google/nerfies/releases/tag/0.1"
 												class="external-link button is-normal is-rounded is-dark"
@@ -157,7 +157,7 @@
 												</span>
 												<span>Data</span>
 											</a>
-										</span>
+										</span> -->
 									</div>
 								</div>
 							</div>
@@ -254,9 +254,9 @@
 			<div class="flex flex-col w-full h-full bg-nav rounded-md p-4 lg:!p-8">
 				<nav class="flex px-2 pb-2">
 					<div class="flex lg:pb-2 lg:px-8 items-center gap-2">
-						<img src="./static/images/miis_lab_logo.png" class="w-14" alt="logo" />
-						<div class="border border-gray-400 h-8 mx-2"></div>
-						<div class="title text-2xl lg:text-2xl text-gray-300">DanceLDM</div>
+						<!-- <img src="./static/images/miis_lab_logo.png" class="w-14" alt="logo" /> -->
+						<!-- <div class="border border-gray-400 h-8 mx-2"></div> -->
+						<div class="title text-2xl lg:text-3xl text-gray-200 pb-1">DanceLDM</div>
 					</div>
 				</nav>
 
@@ -272,9 +272,11 @@
 									<div class="">
 										<label for="file" class="flex gap-2 items-center">
 											<div
-												class="btn-upload flex px-9 py-2 gap-2 cursor-pointer active:bg-violet-500/90 bg-btn rounded-sm items-center"
+												class="btn-upload flex px-5 py-2 gap-3 cursor-pointer hover:bg-violet-500/90 bg-btn rounded-sm items-center"
 											>
-												<i class="fas fa-upload"></i>Upload Music
+												<i><img src="./static/images/upload.png" alt="upload icon" class="w-5" /> </i>
+												<!-- <i class="fas fa-upload"></i> -->
+												Upload Music
 												<input id="file" type="file" accept=".mp3" class="hidden" />
 											</div>
 											<div class="filename-text"></div>
@@ -287,24 +289,108 @@
 									<div class="video-title text-lg font-semibold items-center">Dance Video</div>
 									<div class="video-name text-sm text-gray-400"></div>
 								</div>
-								<div class="bg-video rounded-md items-center justify-center flex aspect-video">
-									<video src="" class="dance-video hidden" controls></video>
+								<div class="">
+									<!-- tab component start -->
+									<div class="">
+										<div x-data="{ openTab: 2 }">
+											<div>
+												<div
+													x-show="openTab === 1"
+													class="bg-video rounded-md items-center justify-center flex aspect-video"
+												>
+													<div class="loading-skeleton modal-body flex flex-col items-center gap-4 hidden">
+														<div class="skeleton-progress-label text-2xl mt-4">Generating...</div>
+														<div class="progress-container w-screen flex items-center justify-center">
+															<div class="w-[70%] lg:w-96 bg-gray-200 rounded-full h-4 mb-4 bg-gray-500">
+																<div
+																	class="skeleton-progress h-4 rounded-full bg-gray-100"
+																	style="width: 0%"
+																></div>
+															</div>
+														</div>
+													</div>
+													<video src="" class="skeleton-video h-full hidden" controls></video>
+												</div>
+
+												<div
+													x-show="openTab === 2"
+													class="bg-video rounded-md items-center justify-center flex aspect-video"
+												>
+													<div class="loading-avatar modal-body flex flex-col items-center gap-4 hidden">
+														<div class="avatar-progress-label text-2xl mt-4">Generating...</div>
+														<div class="progress-container w-screen flex items-center justify-center">
+															<div class="w-[70%] lg:w-96 bg-gray-200 rounded-full h-4 mb-4 bg-gray-500">
+																<div
+																	class="avatar-progress h-4 rounded-full bg-gray-100"
+																	style="width: 0%"
+																></div>
+															</div>
+														</div>
+													</div>
+													<video src="" class="avatar-video h-full hidden" controls></video>
+												</div>
+												<div class="mode-switch-btn-container flex justify-end items-center">
+													<div class="mode-switch-btn flex flex-row mt-2 hidden">
+														<div class="bg-gray-600 rounded-l-2xl">
+															<div
+																x-on:click="openTab = 1"
+																:class="{ '!bg-btn !text-white !cursor-default': openTab === 1 }"
+																class="bg-gray-600 py-2 px-4 text-gray-400 hover:text-gray-300 cursor-pointer rounded-2xl focus:outline-none focus:shadow-outline-blue transition-all duration-300"
+															>
+																Skeleton
+															</div>
+														</div>
+
+														<div class="bg-gray-600 rounded-r-2xl">
+															<div
+																x-on:click="openTab = 2"
+																:class="{ '!bg-btn !text-white !cursor-default': openTab === 2 }"
+																class="bg-gray-600 py-2 px-4 text-gray-400 hover:text-gray-300 cursor-pointer rounded-2xl focus:outline-none focus:shadow-outline-blue transition-all duration-300"
+															>
+																Avatar
+															</div>
+														</div>
+													</div>
+													<div class="current-quality text-gray-400 text-sm"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- tab component end -->
 								</div>
+								<!-- </div> -->
 							</div>
 						</div>
 						<div class="container-right mt-8 lg:mt-0 lg:px-6 flex flex-col">
 							<div class="edit w-full">
 								<div class="flex h-fit mb-8 items-center text-xl font-bold">
 									<div class="w-1 h-7 me-2 rounded-md bg-gradient-to-b from-[#6887BF] to-[#945F9F]"></div>
-									Edit Dance
+									Settings
+									<!-- Edit DanceSetting -->
 								</div>
+								<div class="setting mb-5">
+									<div class="mb-2">Quality</div>
+									<div class="quality-selector bg-gray-600 inline-flex rounded-2xl">
+										<div
+											class="quality-high bg-[#4b83cf] py-2 px-4 text-center text-white cursor-default rounded-2xl focus:outline-none focus:shadow-outline-blue transition-all duration-300"
+										>
+											High quality (Fast)
+										</div>
+										<div
+											class="quality-low bg-gray-600 py-2 px-4 text-center text-gray-400 hover:text-gray-300 cursor-pointer rounded-2xl focus:outline-none focus:shadow-outline-blue transition-all duration-300"
+										>
+											Low quality (Slow)
+										</div>
+									</div>
+								</div>
+
 								<div class="setting mb-5">
 									<div class="description mb-2">Edit times Setting</div>
 									<div class="slider flex items-center gap-2">
 										<div class="slider-track-container">
 											<div class="slider-track">
-												<div id="startHandle" class="slider-handle opacity-0"></div>
-												<div id="endHandle" class="slider-handle opacity-0"></div>
+												<div id="startHandle" class="p-3 absolute -translate-x-1/2 slider-handle opacity-0"></div>
+												<div id="endHandle" class="p-3 absolute -translate-x-1/2 slider-handle opacity-0"></div>
 											</div>
 										</div>
 										<div class="slider-label text-nowrap text-sm"></div>
@@ -327,10 +413,10 @@
 														class="number-input bg-gray-700 p-2 text-slate-200 w-full"
 													/>
 													<div class="flex flex-col gap-1">
-														<div class="increase-startTime-btn arrow flex-1 bg-gray-700 px-1">
+														<div class="increase-startTime-btn arrow select-none flex-1 bg-gray-700 px-1">
 															<i class="fas fa-chevron-up"></i>
 														</div>
-														<div class="decrease-startTime-btn arrow flex-1 bg-gray-700 px-1">
+														<div class="decrease-startTime-btn arrow select-none flex-1 bg-gray-700 px-1">
 															<i class="fas fa-chevron-down"></i>
 														</div>
 													</div>
@@ -354,10 +440,10 @@
 														class="number-input bg-gray-700 p-2 text-slate-200 w-full"
 													/>
 													<div class="flex flex-col gap-1">
-														<div class="increase-endTime-btn arrow flex-1 bg-gray-700 px-1">
+														<div class="increase-endTime-btn arrow select-none flex-1 bg-gray-700 px-1">
 															<i class="fas fa-chevron-up"></i>
 														</div>
-														<div class="decrease-endTime-btn arrow flex-1 bg-gray-700 px-1">
+														<div class="decrease-endTime-btn arrow select-none flex-1 bg-gray-700 px-1">
 															<i class="fas fa-chevron-down"></i>
 														</div>
 													</div>
@@ -385,7 +471,7 @@
 										value="Generate"
 										id="submit"
 										type="submit"
-										class="submit-btn py-1 px-14 cursor-pointer active:bg-violet-500/90 bg-btn rounded-sm items-center"
+										class="submit-btn py-1 px-14 cursor-pointer hover:bg-violet-500/90 bg-btn rounded-sm items-center"
 									/>
 								</div>
 							</div>
@@ -400,26 +486,15 @@
 					</div>
 				</form>
 			</div>
-			<div class="loading-modal absolute flex justify-center items-center inset-0 bg-gray-700/90 hidden">
-				<div class="modal-body flex flex-col items-center gap-4">
+			<div class="loading-skeleton absolute flex justify-center items-center inset-0 bg-gray-700/90 hidden">
+				<!-- <div class="modal-body flex flex-col items-center gap-4">
 					<div class="progress-label text-2xl mt-4">Generating...</div>
-
 					<div class="progress-container w-screen flex items-center justify-center">
 						<div class="w-[70%] lg:w-96 bg-gray-200 rounded-full h-4 mb-4 bg-gray-500">
 							<div class="progress h-4 rounded-full bg-gray-100" style="width: 0%"></div>
 						</div>
 					</div>
-
-					<!-- circle -->
-					<!-- <div
-						class="inline-block h-16 w-16 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
-						role="status"
-					>
-						<span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-							>Generating...</span
-						>
-					</div> -->
-				</div>
+				</div> -->
 			</div>
 		</section>
 
@@ -466,15 +541,14 @@
 						<div class="content">
 							<p>
 								This website is licensed under a
-								<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"
+								<a class="underline" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"
 									>Creative Commons Attribution-ShareAlike 4.0 International License</a
 								>.
 							</p>
 							<p>
-								This means you are free to borrow the
-								<a href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website, we just ask that you
-								link back to this page in the footer. Please remember to remove the analytics code included in the header of
-								the website which you do not want on your website.
+								<a class="underline" href="https://github.com/nerfies/nerfies.github.io"
+									>The source code of this website template.</a
+								>
 							</p>
 						</div>
 					</div>
@@ -525,7 +599,7 @@
 					});
 			});
 		</script> -->
-
+		<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 		<script>
 			const alertContainer = document.querySelector('.alert-container');
 			const waitForTimeout = (millisecond) => new Promise((resolve) => setTimeout(resolve, millisecond));
@@ -600,40 +674,58 @@
 		<!-- API test -->
 
 		<script>
+			const switchEnable = true;
 			// const testBtn = document.querySelector('.testBtn');
 			// testBtn.addEventListener('click', () => {
 			// 	showError('Warning', 'test error');
 			// });
+			if (switchEnable) {
+				const switchBtn = document.querySelector('.mode-switch-btn');
+				const switchBtnContainer = document.querySelector('.mode-switch-btn-container');
+				switchBtn.classList.remove('hidden');
+				switchBtnContainer.classList.remove('justify-end');
+				switchBtnContainer.classList.add('justify-between');
+			}
 
+			const promptForm = document.getElementById('promptForm');
 			const fileUploadInput = document.querySelector('#file');
+			const filenameText = document.querySelector('.filename-text');
+
+			const danceVideoName = document.querySelector('.video-name');
+			const skeletonVideo = document.querySelector('.skeleton-video');
+			const avatarVideo = document.querySelector('.avatar-video');
+			const loadingSkeletonModal = document.querySelector('.loading-skeleton');
+			const skeletonProgressBar = document.querySelector('.skeleton-progress');
+			const skeletonProgressLabel = document.querySelector('.skeleton-progress-label');
+			const loadingAvatarModal = document.querySelector('.loading-avatar');
+			const avatarProgressBar = document.querySelector('.avatar-progress');
+			const avatarProgressLabel = document.querySelector('.avatar-progress-label');
+
+			const qualitySelector = document.querySelector('.quality-selector');
+			const highQualityLabel = document.querySelector('.quality-high');
+			const lowQualityLabel = document.querySelector('.quality-low');
+
 			const sliderLabel = document.querySelector('.slider-label');
 			const startTimeInput = document.querySelector('#startTime');
 			const endTimeInput = document.querySelector('#endTime');
 			const sliderTrack = document.querySelector('.slider-track');
 			const startHandle = document.querySelector('#startHandle');
 			const endHandle = document.querySelector('#endHandle');
-			const descriptionInput = document.querySelector('.description-input');
-			const danceVideo = document.querySelector('.dance-video');
-			const danceVideoName = document.querySelector('.video-name');
-			const filenameText = document.querySelector('.filename-text');
-			const submitBtn = document.querySelector('.submit-btn');
-			const promptForm = document.getElementById('promptForm');
-
-			const loadingModal = document.querySelector('.loading-modal');
-			const progressBar = document.querySelector('.progress');
-			const progressLabel = document.querySelector('.progress-label');
-
-			const historyContainer = document.querySelector('.history-container');
-
 			const increaseStartTimeBtn = document.querySelector('.increase-startTime-btn'); // increase-startTime-btn
 			const decreaseStartTimeBtn = document.querySelector('.decrease-startTime-btn'); // decrease-startTime-btn
 			const increaseEndTimeBtn = document.querySelector('.increase-endTime-btn'); // increase-endTime-btn
 			const decreaseEndTimeBtn = document.querySelector('.decrease-endTime-btn'); // decrease-endTime-btn
 
+			const descriptionInput = document.querySelector('.description-input');
+			const historyContainer = document.querySelector('.history-container');
+
 			const [timeState, setTimeState, timeSubscribe] = createState(null);
 			const [historyState, setHistoryState, historyStateSubscribe] = createState([]);
-			const [editState, setEditState, editStateSubscribe] = createState({ file: null, settings: null, preID: null });
+			const [editState, setEditState, editStateSubscribe] = createState({ file: null, settings: null, id: null });
 			const step = 0.01;
+			let highQuality = true;
+			toggleQuality();
+
 			const timeSettingBtnList = [
 				{
 					element: increaseStartTimeBtn,
@@ -682,7 +774,7 @@
 			];
 
 			let file;
-			// let preID = null;
+			// let id = null;
 
 			const enableEditControls = () => {
 				const { settings } = editState();
@@ -732,21 +824,25 @@
 					} else setEditState((pre) => pre);
 				}
 			};
+
 			const dragHandle = (handle, isStart) => {
 				const { settings } = editState();
 				handle.classList.remove('opacity-0');
 				handle.classList.add('cursor-pointer');
+
+				function updatePosition(position) {
+					const rect = sliderTrack.getBoundingClientRect();
+					let rate = (position - rect.left) / rect.width;
+					if (rate < 0) rate = 0;
+					if (rate > 1) rate = 1;
+
+					if (isStart) updateEditSettings({ startTime: rate * settings.duration });
+					else updateEditSettings({ endTime: rate * settings.duration });
+				}
 				handle.onmousedown = function (event) {
 					event.preventDefault();
 					document.onmousemove = function (event) {
-						const rect = sliderTrack.getBoundingClientRect();
-						let rate = (event.clientX - rect.left) / rect.width;
-
-						if (rate < 0) rate = 0;
-						if (rate > 1) rate = 1;
-
-						if (isStart) updateEditSettings({ startTime: rate * settings.duration });
-						else updateEditSettings({ endTime: rate * settings.duration });
+						updatePosition(event.clientX);
 					};
 
 					document.onmouseup = function () {
@@ -754,13 +850,28 @@
 						document.onmouseup = null;
 					};
 				};
+				handle.ontouchstart = function (event) {
+					event.preventDefault();
+					document.ontouchmove = function (event) {
+						updatePosition(event.touches[0].clientX);
+					};
+					document.ontouchend = function () {
+						document.ontouchmove = null;
+						document.ontouchend = null;
+					};
+				};
 			};
+
 			const disabledDragHandle = (handle) => {
 				handle.classList.remove('cursor-pointer');
 				handle.classList.add('opacity-0');
+
 				handle.onmousedown = null;
 				handle.onmouseup = null;
 				handle.onmousemove = null;
+				handle.ontouchstart = null;
+				handle.ontouchmove = null;
+				handle.ontouchend = null;
 			};
 
 			fileUploadInput.addEventListener('change', (e) => {
@@ -778,7 +889,7 @@
 					const editStateT = {
 						file: file,
 						settings,
-						preID: null,
+						id: null,
 					};
 					setEditState(editStateT);
 					startTimeInput.setAttribute('max', settings.duration);
@@ -788,9 +899,12 @@
 				});
 			});
 
-			const updateUI = ({ file, preID, settings: { startTime, endTime, duration, description } }) => {
-				if (preID == null) disabledEditControls();
+			const updateUI = ({ file, id, settings: { startTime, endTime, duration, description, quality } }) => {
+				if (id == null) disabledEditControls();
 				else enableEditControls();
+				if (quality) {
+					if ((highQuality && quality === 'low') || (!highQuality && quality === 'high')) toggleQuality();
+				}
 
 				if (file) {
 					const { name } = file;
@@ -798,6 +912,7 @@
 				} else filenameText.innerText = name;
 
 				startTimeInput.value = parseFloat(startTime).toFixed(3);
+				avatarVideo.currentTime = parseFloat(startTime).toFixed(3);
 				endTimeInput.value = parseFloat(endTime).toFixed(3);
 				descriptionInput.value = description;
 
@@ -813,112 +928,242 @@
 				endHandle.style.left = endPercent + '%';
 			};
 
-			const updateHistory = (state) => {
+			const updateHistoryUI = (state) => {
+				localStorage.setItem('historyState', JSON.stringify(state));
 				historyContainer.innerHTML = '';
-				state.forEach(({ id, video_url, name, settings }, index) => {
-					const videoIcon = document.createElement('div');
-					videoIcon.className = 'history-item w-14 cursor-pointer';
-					videoIcon.innerHTML = `
-					<div class="h-14 flex justify-center items-center bg-btn rounded-md">
-						<i class="fas fa-video"></i>
-						</div>
-						<div class="history-item-name mt-2 text-xs text-center w-full break-words">${name}</div>`;
-					videoIcon.addEventListener('click', () => {
-						preID = id;
-						danceVideo.setAttribute('src', video_url);
+				state.forEach(({ id, skeleton_url, avatar_url, name, settings }, index) => {
+					const videoHistory = document.createElement('div');
+					videoHistory.className = 'history-item w-14 relative';
+					const historyDeleteBtn = document.createElement('div');
+					historyDeleteBtn.className =
+						'flex items-center text-xs justify-center bg-gray-400/90 w-4 h-4 text-white rounded-full absolute -top-1 -right-1 cursor-pointer hover:bg-red-500 transition-opacity duration-300 delay-5000';
+					historyDeleteBtn.innerHTML = `x`;
+					const historyBtn = document.createElement('div');
+					historyBtn.className = 'h-14 flex justify-center items-center bg-btn cursor-pointer hover:bg-violet-500/90 rounded-md';
+					historyBtn.innerHTML = `<i><img src="./static/images/folder.png" alt="video icon" class="w-8" /></i>`;
+					const historyLabel = document.createElement('div');
+					historyLabel.className = 'history-item-name mt-2 text-xs text-center w-full break-words';
+					historyLabel.innerText = name;
+
+					historyBtn.addEventListener('click', () => {
+						// document.onm
+						if (skeleton_url !== null) {
+							loadingSkeletonModal.classList.add('hidden');
+							skeletonVideo.classList.remove('hidden');
+						} else loadingAvatarModal.classList.remove('hidden');
+						if (skeleton_url !== skeletonVideo.src) skeletonVideo.setAttribute('src', skeleton_url);
+
+						if (avatar_url !== null) {
+							loadingAvatarModal.classList.add('hidden');
+							avatarVideo.classList.remove('hidden');
+						} else loadingSkeletonModal.classList.remove('hidden');
+						if (avatar_url !== avatarVideo.src) avatarVideo.setAttribute('src', avatar_url);
+
 						danceVideoName.innerText = name;
-						setEditState({ file: null, settings, preID: id });
+						setEditState({ file: null, settings, id });
 					});
-					historyContainer.appendChild(videoIcon);
+					historyDeleteBtn.addEventListener('click', () => {
+						event.stopPropagation();
+						deleteHistory(id);
+					});
+					videoHistory.appendChild(historyDeleteBtn);
+					videoHistory.appendChild(historyBtn);
+					videoHistory.appendChild(historyLabel);
+					historyContainer.appendChild(videoHistory);
 				});
 			};
+			function deleteHistory(id) {
+				const newHistory = historyState().filter((history) => history.id !== id);
+				setHistoryState(newHistory);
+			}
 
-			// timeSubscribe(updateUI);
 			editStateSubscribe(updateUI);
-			historyStateSubscribe(updateHistory);
+			historyStateSubscribe(updateHistoryUI);
+
+			async function checkRerender(preId) {
+				const historyIndex = historyState().findIndex((history) => history.id === preId);
+				const history = historyState()[historyIndex];
+				if (
+					history.settings.quality !== 'low' ||
+					JSON.stringify({ ...history.settings, quality: 'high' }) !==
+						JSON.stringify({ ...editState().settings, quality: highQuality ? 'high' : 'low' })
+				) {
+					console.log(' [debug] No rerender ');
+					return false;
+				}
+
+				const formData = new FormData();
+				formData.append('preId', preId);
+				formData.append('sid', sid);
+				try {
+					const responseData = await rerenderById(formData);
+					const { avatar_url, id } = responseData;
+					const newHistory = JSON.parse(JSON.stringify(historyState()));
+					newHistory[historyIndex] = {
+						...newHistory[historyIndex],
+						settings: { ...newHistory[historyIndex].settings, quality: 'high' },
+						avatar_url: host + avatar_url,
+					};
+					setHistoryState(newHistory);
+					avatarVideo.setAttribute('src', host + avatar_url);
+				} catch (error) {
+					console.error(' [debug] error: ', error);
+					showError('Error', 'Failed to connect to server.');
+				}
+				console.log(' [debug] high!!!!!: ');
+				return true;
+			}
 
 			promptForm.addEventListener('submit', async (event) => {
 				event.preventDefault();
+				console.log(' [debug] submit ');
+				if (editState().id && (await checkRerender(editState().id))) return;
+				console.log(' [debug] generate! ');
 
-				if (editState().file == null && (editState().settings == null || editState().preID == null)) {
+				if (editState().file == null && (editState().settings == null || editState().id == null)) {
 					showError('Warning', 'Please select a music file or choose a record from history.');
 					return;
 				}
 
-				loadingModal.classList.remove('hidden');
+				skeletonVideo.classList.add('hidden');
+				avatarVideo.classList.add('hidden');
+				loadingSkeletonModal.classList.remove('hidden');
+				loadingAvatarModal.classList.remove('hidden');
 
 				const description = descriptionInput.value;
 				const formData = new FormData();
-				const { file, settings, preID } = editState();
-
-				formData.append('preID', preID);
+				const { file, settings, id } = editState();
+				const quality = highQuality ? 'high' : 'low';
+				const newSettings = { ...settings, quality };
+				formData.append('preId', id);
 				formData.append('file', file);
 				formData.append('sid', sid);
-				formData.append('settings', JSON.stringify({ ...settings }));
+				formData.append('settings', JSON.stringify(newSettings));
 				try {
-					const fake = true;
+					const fake = false;
 					let postMusicToServer;
 					if (fake) postMusicToServer = fakeFetch;
-					else postMusicToServer = postMusicToServerTest;
+					else postMusicToServer = generateBySettings;
+
+					const name = new Date().toLocaleTimeString('en-US');
+					danceVideoName.innerText = name;
+
 					const responseData = await postMusicToServer(formData);
-					const { video_url: videoSrc, id } = responseData;
+					const { skeleton_url, avatar_url, id } = responseData;
 
 					// handle History
-					let video_url;
-					if (fake) video_url = videoSrc;
-					else video_url = HOST + videoSrc;
-					const name = new Date().toLocaleTimeString('en-US');
-					const history = { id, video_url, name, settings };
+					const history = { id, skeleton_url: host + skeleton_url, avatar_url: host + avatar_url, name, settings: newSettings };
 					setHistoryState((pre) => [...pre, history]);
+					if ((highQuality && quality === 'low') || (!highQuality && quality === 'high')) toggleQuality();
 
-					// handle Dance Video
-					danceVideo.setAttribute('src', video_url);
-					danceVideoName.innerText = name;
-					danceVideo.classList.remove('hidden');
-
-					setEditState((pre) => ({ preID: id, file: null, settings }));
 					fileUploadInput.value = '';
 				} catch (error) {
-					console.log(' [debug] error: ', error);
+					console.error(' [debug] error: ', error);
 					showError('Error', 'Failed to connect to server.');
 				}
-				progressBar.style.width = `0%`;
-				progressLabel.innerText = `Generating...\t0%`;
-				loadingModal.classList.add('hidden');
+				skeletonProgressBar.style.width = `0%`;
+				skeletonProgressLabel.innerText = `Generating...\t0%`;
+				loadingSkeletonModal.classList.add('hidden');
+				avatarProgressBar.style.width = `0%`;
+				avatarProgressLabel.innerText = `Generating...\t0%`;
+				loadingAvatarModal.classList.add('hidden');
 			});
+			function toggleQuality() {
+				activateLabel = lowQualityLabel;
+				nonActivateLabel = highQualityLabel;
+				if (highQuality) {
+					activateLabel = highQualityLabel;
+					nonActivateLabel = lowQualityLabel;
+				}
+				activateLabel.classList.remove('bg-[#4b83cf]', 'text-white', 'cursor-default');
+				activateLabel.classList.add('bg-gray-600', 'text-gray-400', 'cursor-pointer', 'hover:text-gray-300');
+
+				nonActivateLabel.classList.add('bg-[#4b83cf]', 'text-white', 'cursor-default');
+				nonActivateLabel.classList.remove('bg-gray-600', 'text-gray-400', 'cursor-pointer', 'hover:text-gray-300');
+
+				highQuality = !highQuality;
+			}
+			qualitySelector.addEventListener('click', toggleQuality);
+			// load history
+			setHistoryState(JSON.parse(localStorage.getItem('historyState')) || []);
 		</script>
 
 		<!-- backend service -->
 		<script>
-			const HOST = 'http://127.0.0.1:5001';
+			// const LOCALHOST = 'http://114.33.208.144:5001';
+			// const LOCALHOST = 'http://192.168.1.197:5001';
+			const LOCALHOST = 'http://127.0.0.1:8005';
+			const HOST = 'https://native-oarfish-highly.ngrok-free.app';
+			const host =
+				window.location.host === 'gaozhengting3.github.io' || window.location.host === 'miislab.github.io' ? HOST : LOCALHOST;
+			// const host = HOST;
+			console.log(' [debug] host: ', host);
 			let sid;
 
 			// Socket handler
-			const socket = io(HOST);
+			const socket = io(host, { transports: ['websocket', 'polling'] });
 			socket.on('join', (data) => {
+				console.log(' [debug] connect to socket server: ');
 				sid = data.sid;
 			});
-			socket.on('progress_update', ({ progress }) => {
-				progressLabel.innerText = `Generating...\t${parseInt(progress * 100)}%`;
-				progressBar.style.width = `${progress * 100}%`;
+
+			socket.on('video_create', ({ id, settings }) => {
+				settings = JSON.parse(settings);
+				setEditState((pre) => ({ id, file: null, settings }));
 			});
 
+			socket.on('progress_update', ({ id, progress, type }) => {
+				// console.log(' [debug] progress_update: ', progress, type);
+				if (id == editState().id) progressUpdate(progress, type);
+			});
+
+			socket.on('progress_done', ({ id, type, url }) => {
+				video_url = host + url;
+				// console.log(' [debug] progress_done: ', type, video_url);
+				if (type == 'skeleton') {
+					if (video_url !== skeletonVideo.src) skeletonVideo.setAttribute('src', video_url);
+					skeletonVideo.classList.remove('hidden');
+					loadingSkeletonModal.classList.add('hidden');
+				} else if (type == 'avatar') {
+					if (video_url !== skeletonVideo.src) avatarVideo.setAttribute('src', video_url);
+					avatarVideo.classList.remove('hidden');
+					loadingAvatarModal.classList.add('hidden');
+				}
+			});
+
+			socket.on('connect_error', (err) => {
+				console.error('Socket connection error:', err);
+			});
+			function progressUpdate(progress, type) {
+				if (type == 'skeleton') {
+					skeletonProgressLabel.innerText = `Generating...\t${parseInt(progress * 100)}%`;
+					skeletonProgressBar.style.width = `${progress * 100}%`;
+				} else if (type == 'avatar') {
+					avatarProgressLabel.innerText = `Generating...\t${parseInt(progress * 100)}%`;
+					avatarProgressBar.style.width = `${progress * 100}%`;
+				}
+			}
 			async function fakeFetch(request) {
 				const timeout = 1500;
 				const intervalMS = 100;
 				let generateProgress = 0;
 				const interval = setInterval(() => {
 					generateProgress += intervalMS / timeout;
-					progressBar.style.width = `${generateProgress * 100}%`;
-					progressLabel.innerText = `Generating...\t${parseInt(generateProgress * 100)}%`;
+					progressUpdate(generateProgress);
 				}, intervalMS);
 				await waitForTimeout(timeout);
 				clearInterval(interval);
 				const responseData = { id: 1, success: true, message: 'done', video_url: './static/videos/test_video1.mp4' };
 				return responseData;
 			}
-			async function postMusicToServerTest(formData) {
-				const response = await fetch(HOST + '/generate', { method: 'POST', body: formData });
+
+			async function generateBySettings(formData) {
+				const response = await fetch(host + '/generate', { method: 'POST', body: formData });
+				const responseData = await response.json();
+				return responseData;
+			}
+			async function rerenderById(formData) {
+				const response = await fetch(host + '/rerender', { method: 'POST', body: formData });
 				const responseData = await response.json();
 				return responseData;
 			}
