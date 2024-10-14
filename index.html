@@ -277,7 +277,7 @@
 												<i><img src="./static/images/upload.png" alt="upload icon" class="w-5" /> </i>
 												<!-- <i class="fas fa-upload"></i> -->
 												Upload Music
-												<input id="file" type="file" accept=".mp3" class="hidden" />
+												<input id="file" type="file" accept=".wav" class="hidden" />
 											</div>
 											<div class="filename-text"></div>
 										</label>
@@ -904,7 +904,7 @@
 				const historyIndex = historyState().findIndex((history) => history.id === preId);
 				const history = historyState()[historyIndex];
 				if (
-					history.settings.quality !== 'low' ||
+					history?.settings.quality !== 'low' ||
 					JSON.stringify({ ...history.settings, quality: 'high' }) !==
 						JSON.stringify({ ...editState().settings, quality: highQuality ? 'high' : 'low' })
 				) {
@@ -1012,9 +1012,9 @@
 			// const HOST = 'https://native-oarfish-highly.ngrok-free.app';
 			const LOCALHOST = 'http://127.0.0.1:8443';
 			const HOST = 'https://miislab.pagekite.me/';
-			// const host =
-			// 	window.location.host === 'gaozhengting3.github.io' || window.location.host === 'miislab.github.io' ? HOST : LOCALHOST;
-			const host = HOST;
+			const host =
+				window.location.host === 'gaozhengting3.github.io' || window.location.host === 'miislab.github.io' ? HOST : LOCALHOST;
+			// const host = HOST;
 			console.log(' [debug] host: ', host);
 			let sid;
 
