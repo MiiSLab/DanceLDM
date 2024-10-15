@@ -98,8 +98,7 @@
 								</div>
 
 								<div class="column has-text-centered">
-									<div class="publication-links">
-										<!-- PDF Link. -->
+									<!-- <div class="publication-links">
 										<span class="link-block">
 											<a
 												href="https://sites.google.com/view/ntust-miislab"
@@ -122,7 +121,6 @@
 												<span>arXiv</span>
 											</a>
 										</span>
-										<!-- Video Link. -->
 										<span class="link-block">
 											<a
 												href="https://sites.google.com/view/ntust-miislab"
@@ -134,7 +132,6 @@
 												<span>Video</span>
 											</a>
 										</span>
-										<!-- Code Link. -->
 										<span class="link-block">
 											<a
 												href="https://sites.google.com/view/ntust-miislab"
@@ -146,19 +143,7 @@
 												<span>Code</span>
 											</a>
 										</span>
-										<!-- Dataset Link. -->
-										<!-- <span class="link-block">
-											<a
-												href="https://github.com/google/nerfies/releases/tag/0.1"
-												class="external-link button is-normal is-rounded is-dark"
-											>
-												<span class="icon">
-													<i class="far fa-images"></i>
-												</span>
-												<span>Data</span>
-											</a>
-										</span> -->
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
@@ -351,6 +336,7 @@
 															</div>
 														</div>
 													</div>
+													<div class="high-progress"></div>
 													<div class="current-quality text-gray-400 text-sm"></div>
 												</div>
 											</div>
@@ -594,7 +580,8 @@
 		<!-- API test -->
 
 		<script>
-			const switchEnable = true;
+			const switchEnable = false;
+			// const switchEnable = true;
 			// const testBtn = document.querySelector('.testBtn');
 			// testBtn.addEventListener('click', () => {
 			// 	showError('Warning', 'test error');
@@ -612,11 +599,11 @@
 			const filenameText = document.querySelector('.filename-text');
 
 			const danceVideoName = document.querySelector('.video-name');
-			const skeletonVideo = document.querySelector('.skeleton-video');
+			// const skeletonVideo = document.querySelector('.skeleton-video');
 			const avatarVideo = document.querySelector('.avatar-video');
 			const loadingSkeletonModal = document.querySelector('.loading-skeleton');
-			const skeletonProgressBar = document.querySelector('.skeleton-progress');
-			const skeletonProgressLabel = document.querySelector('.skeleton-progress-label');
+			// const skeletonProgressBar = document.querySelector('.skeleton-progress');
+			// const skeletonProgressLabel = document.querySelector('.skeleton-progress-label');
 			const loadingAvatarModal = document.querySelector('.loading-avatar');
 			const avatarProgressBar = document.querySelector('.avatar-progress');
 			const avatarProgressLabel = document.querySelector('.avatar-progress-label');
@@ -641,7 +628,8 @@
 
 			const [timeState, setTimeState, timeSubscribe] = createState(null);
 			const [historyState, setHistoryState, historyStateSubscribe] = createState([]);
-			const [editState, setEditState, editStateSubscribe] = createState({ file: null, settings: null, id: null });
+			const emptyEditSettings = { file: null, settings: null, id: null };
+			const [editState, setEditState, editStateSubscribe] = createState(emptyEditSettings);
 			const step = 0.01;
 			let highQuality = true;
 			toggleQuality();
@@ -711,7 +699,7 @@
 					element.classList.add('cursor-pointer');
 				});
 				timeSettingInputList.forEach(({ element, handler }) => {
-					element.addEventListener('input', handler);
+					element.addEventListener('change', handler);
 				});
 			};
 			const disabledEditControls = () => {
@@ -726,7 +714,7 @@
 					element.classList.remove('cursor-pointer');
 				});
 				timeSettingInputList.forEach(({ element, handler }) => {
-					element.removeEventListener('input', handler);
+					element.removeEventListener('change', handler);
 				});
 			};
 			const updateEditSettings = (newSettings) => {
@@ -795,6 +783,8 @@
 			};
 
 			fileUploadInput.addEventListener('change', (e) => {
+				console.log(' [debug] """"""value"""""": ');
+				avatarVideo.classList.add('hidden');
 				disabledEditControls();
 				file = e.target.files[0];
 				const audio = new Audio(URL.createObjectURL(file));
@@ -846,12 +836,24 @@
 				sliderTrack.style.background = `linear-gradient(to right, ${bgc} ${startPercent}%, ${color} ${startPercent}%, ${color} ${endPercent}%, ${bgc} ${endPercent}%)`;
 				startHandle.style.left = startPercent + '%';
 				endHandle.style.left = endPercent + '%';
+				activateIcon(id);
 			};
-
+			const activateIcon = (id) => {
+				const historyIndex = historyState().findIndex((history) => history.id === id);
+				if (historyIndex === -1) return;
+				historyList = Array.from(historyContainer.children);
+				historyList.forEach((historyItem) => {
+					const historyIcon = historyItem.children[1]; // 获取第二个子元素
+					if (historyIcon) {
+						historyIcon.classList.remove('!bg-violet-500/90'); // 添加 'active' class
+					}
+				});
+				historyList[historyIndex].children[1].classList.add('!bg-violet-500/90');
+			};
 			const updateHistoryUI = (state) => {
 				localStorage.setItem('historyState', JSON.stringify(state));
 				historyContainer.innerHTML = '';
-				state.forEach(({ id, skeleton_url, avatar_url, name, settings }, index) => {
+				state.forEach(({ id, skeleton_url, avatar_url, name, settings, rendering }, index) => {
 					const videoHistory = document.createElement('div');
 					videoHistory.className = 'history-item w-14 relative';
 					const historyDeleteBtn = document.createElement('div');
@@ -864,24 +866,27 @@
 					const historyLabel = document.createElement('div');
 					historyLabel.className = 'history-item-name mt-2 text-xs text-center w-full break-words';
 					historyLabel.innerText = name;
-
-					historyBtn.addEventListener('click', () => {
+					const historyBtnHandler = () => {
 						// document.onm
-						if (skeleton_url !== null) {
-							loadingSkeletonModal.classList.add('hidden');
-							skeletonVideo.classList.remove('hidden');
-						} else loadingAvatarModal.classList.remove('hidden');
-						if (skeleton_url !== skeletonVideo.src) skeletonVideo.setAttribute('src', skeleton_url);
-
+						// if (skeleton_url !== null) {
+						// 	loadingSkeletonModal.classList.add('hidden');
+						// 	skeletonVideo.classList.remove('hidden');
+						// } else loadingAvatarModal.classList.remove('hidden');
+						// if (skeleton_url !== skeletonVideo.src) skeletonVideo.setAttribute('src', skeleton_url);
 						if (avatar_url !== null) {
 							loadingAvatarModal.classList.add('hidden');
 							avatarVideo.classList.remove('hidden');
 						} else loadingSkeletonModal.classList.remove('hidden');
+						if (rendering) {
+							loadingAvatarModal.classList.remove('hidden');
+							avatarVideo.classList.add('hidden');
+						}
 						if (avatar_url !== avatarVideo.src) avatarVideo.setAttribute('src', avatar_url);
 
 						danceVideoName.innerText = name;
 						setEditState({ file: null, settings, id });
-					});
+					};
+					historyBtn.addEventListener('click', historyBtnHandler);
 					historyDeleteBtn.addEventListener('click', () => {
 						event.stopPropagation();
 						deleteHistory(id);
@@ -916,16 +921,31 @@
 				formData.append('preId', preId);
 				formData.append('sid', sid);
 				try {
-					const responseData = await rerenderById(formData);
-					const { avatar_url, id } = responseData;
+					progressUpdate(0, 'avatar');
+					loadingAvatarModal.classList.remove('hidden');
+					avatarVideo.classList.add('hidden');
 					const newHistory = JSON.parse(JSON.stringify(historyState()));
 					newHistory[historyIndex] = {
 						...newHistory[historyIndex],
 						settings: { ...newHistory[historyIndex].settings, quality: 'high' },
-						avatar_url: host + avatar_url,
+						rendering: true,
 					};
 					setHistoryState(newHistory);
+					activateIcon(preId);
+
+					const responseData = await rerenderById(formData);
+					const { avatar_url, id } = responseData;
+					newHistory[historyIndex] = {
+						...newHistory[historyIndex],
+						settings: { ...newHistory[historyIndex].settings, quality: 'high' },
+						avatar_url: host + avatar_url,
+						rendering: false,
+					};
+					setHistoryState(newHistory);
+					activateIcon(preId);
 					avatarVideo.setAttribute('src', host + avatar_url);
+					loadingAvatarModal.classList.add('hidden');
+					avatarVideo.classList.remove('hidden');
 				} catch (error) {
 					console.error(' [debug] error: ', error);
 					showError('Error', 'Failed to connect to server.');
@@ -945,7 +965,7 @@
 					return;
 				}
 
-				skeletonVideo.classList.add('hidden');
+				// skeletonVideo.classList.add('hidden');
 				avatarVideo.classList.add('hidden');
 				loadingSkeletonModal.classList.remove('hidden');
 				loadingAvatarModal.classList.remove('hidden');
@@ -955,35 +975,53 @@
 				const { file, settings, id } = editState();
 				const quality = highQuality ? 'high' : 'low';
 				const newSettings = { ...settings, quality };
+				const name = new Date().toLocaleTimeString('en-US');
 				formData.append('preId', id);
 				formData.append('file', file);
 				formData.append('sid', sid);
+				formData.append('name', name);
 				formData.append('settings', JSON.stringify(newSettings));
 				try {
+					progressUpdate(0, 'skeleton');
+					progressUpdate(0, 'avatar');
 					const fake = false;
 					let postMusicToServer;
 					if (fake) postMusicToServer = fakeFetch;
 					else postMusicToServer = generateBySettings;
 
-					const name = new Date().toLocaleTimeString('en-US');
 					danceVideoName.innerText = name;
 
 					const responseData = await postMusicToServer(formData);
-					const { skeleton_url, avatar_url, id } = responseData;
+					if (responseData?.success) {
+						console.log(' [debug] comein?: ');
+						const { skeleton_url, avatar_url, id } = responseData;
 
-					// handle History
-					const history = { id, skeleton_url: host + skeleton_url, avatar_url: host + avatar_url, name, settings: newSettings };
-					setHistoryState((pre) => [...pre, history]);
-					if ((highQuality && quality === 'low') || (!highQuality && quality === 'high')) toggleQuality();
+						// handle History
+						deleteHistory(id);
+						const history = {
+							id,
+							skeleton_url: host + skeleton_url,
+							avatar_url: host + avatar_url,
+							name,
+							settings: newSettings,
+							rendering: false,
+						};
+						setHistoryState((pre) => [...pre, history]);
+						activateIcon(id);
+						if ((highQuality && quality === 'low') || (!highQuality && quality === 'high')) toggleQuality();
 
-					fileUploadInput.value = '';
+						fileUploadInput.value = '';
+					} else {
+						console.log(' [debug] come out?: ');
+						setEditState(emptyEditSettings);
+						avatarVideo.classList.add('hidden');
+					}
 				} catch (error) {
-					console.error(' [debug] error: ', error);
+					console.log(error);
 					showError('Error', 'Failed to connect to server.');
 				}
 				console.log(' [debug] reset progress: ');
-				progressUpdate(0, 'skeleton');
-				progressUpdate(0, 'avatar');
+
 				loadingSkeletonModal.classList.add('hidden');
 				loadingAvatarModal.classList.add('hidden');
 			});
@@ -1010,6 +1048,7 @@
 		<!-- backend service -->
 		<script>
 			// const HOST = 'https://native-oarfish-highly.ngrok-free.app';
+			// const LOCALHOST = 'http://127.0.0.1:8443';
 			const LOCALHOST = 'http://127.0.0.1:8443';
 			const HOST = 'https://miislab.pagekite.me/';
 			const host =
@@ -1025,9 +1064,13 @@
 				sid = data.sid;
 			});
 
-			socket.on('video_create', ({ id, settings }) => {
+			socket.on('video_create', ({ id, name, settings }) => {
+				console.log(' [debug] "create!!!!!!": ', 'create!!!!!!');
 				settings = JSON.parse(settings);
 				setEditState((pre) => ({ id, file: null, settings }));
+				const history = { id, skeleton_url: null, avatar_url: null, name, settings, rendering: true };
+				setHistoryState((pre) => [...pre, history]);
+				activateIcon(id);
 			});
 
 			socket.on('progress_update', ({ id, progress, type }) => {
@@ -1039,11 +1082,11 @@
 				video_url = host + url;
 				// console.log(' [debug] progress_done: ', type, video_url);
 				if (type == 'skeleton') {
-					if (video_url !== skeletonVideo.src) skeletonVideo.setAttribute('src', video_url);
-					skeletonVideo.classList.remove('hidden');
-					loadingSkeletonModal.classList.add('hidden');
+					// if (video_url !== skeletonVideo.src) skeletonVideo.setAttribute('src', video_url);
+					// skeletonVideo.classList.remove('hidden');
+					// loadingSkeletonModal.classList.add('hidden');
 				} else if (type == 'avatar') {
-					if (video_url !== skeletonVideo.src) avatarVideo.setAttribute('src', video_url);
+					if (video_url !== avatarVideo.src) avatarVideo.setAttribute('src', video_url);
 					avatarVideo.classList.remove('hidden');
 					loadingAvatarModal.classList.add('hidden');
 				}
@@ -1054,8 +1097,8 @@
 			});
 			function progressUpdate(progress, type) {
 				if (type == 'skeleton') {
-					skeletonProgressLabel.innerText = `Generating...\t${parseInt(progress * 100)}%`;
-					skeletonProgressBar.style.width = `${progress * 100}%`;
+					// skeletonProgressLabel.innerText = `Generating...\t${parseInt(progress * 100)}%`;
+					// skeletonProgressBar.style.width = `${progress * 100}%`;
 				} else if (type == 'avatar') {
 					avatarProgressLabel.innerText = `Generating...\t${parseInt(progress * 100)}%`;
 					avatarProgressBar.style.width = `${progress * 100}%`;
@@ -1076,9 +1119,16 @@
 			}
 
 			async function generateBySettings(formData) {
-				const response = await fetch(host + '/generate', { method: 'POST', body: formData });
-				const responseData = await response.json();
-				return responseData;
+				try {
+					const response = await fetch(host + '/generate', { method: 'POST', body: formData });
+					const responseData = await response.json();
+					if (responseData?.success) return responseData;
+					if (responseData?.id) {
+						deleteHistory(responseData.id);
+						showError('Error', responseData?.message);
+						return responseData;
+					}
+				} catch (err) {}
 			}
 			async function rerenderById(formData) {
 				const response = await fetch(host + '/rerender', { method: 'POST', body: formData });
