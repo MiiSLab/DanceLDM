@@ -64,8 +64,33 @@
 		<script src="./static/js/bulma-carousel.min.js"></script>
 		<script src="./static/js/bulma-slider.min.js"></script>
 		<script src="./static/js/index.js"></script>
+		<style>
+			@keyframes ellipsis {
+				0% {
+					content: '';
+				}
+				33% {
+					content: '.';
+				}
+				66% {
+					content: '..';
+				}
+				100% {
+					content: '...';
+				}
+			}
+			.after\:animate-ellipsis::after {
+				animation: ellipsis 1s steps(4, end) infinite;
+			}
+		</style>
 	</head>
 	<body>
+		<!-- <span id="avatarProgressLabel" class="text-lg font-bold text-blue-500">Generating... <span id="progressText">1%</span></span>
+		<p>Generating<span class="animate-pulse after:content-['.'] after:animate-ellipsis"></span>1%</p>
+		<span id="avatarProgressLabel" class="text-lg font-bold text-blue-500">
+			Generating<span class="animate-pulse after:content-['.'] after:animate-ellipsis"></span>
+			<span id="progressText">1%</span>
+		</span> -->
 		<nav class="navbar" role="navigation" aria-label="main navigation">
 			<div class="navbar-brand">
 				<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -284,7 +309,7 @@
 													class="bg-video rounded-md items-center justify-center flex aspect-video"
 												>
 													<div class="loading-skeleton modal-body flex flex-col items-center gap-4 hidden">
-														<div class="skeleton-progress-label text-2xl mt-4">Generating...</div>
+														<div class="animate-pulse skeleton-progress-label text-2xl mt-4">Generating...</div>
 														<div class="progress-container w-screen flex items-center justify-center">
 															<div class="w-[70%] lg:w-96 bg-gray-200 rounded-full h-4 mb-4 bg-gray-500">
 																<div
@@ -302,7 +327,7 @@
 													class="bg-video rounded-md items-center justify-center flex aspect-video"
 												>
 													<div class="loading-avatar modal-body flex flex-col items-center gap-4 hidden">
-														<div class="avatar-progress-label text-2xl mt-4">Generating...</div>
+														<div class="animate-pulse avatar-progress-label text-2xl mt-4">Generating...</div>
 														<div class="progress-container w-screen flex items-center justify-center">
 															<div class="w-[70%] lg:w-96 bg-gray-200 rounded-full h-4 mb-4 bg-gray-500">
 																<div
@@ -1100,7 +1125,13 @@
 					// skeletonProgressLabel.innerText = `Generating...\t${parseInt(progress * 100)}%`;
 					// skeletonProgressBar.style.width = `${progress * 100}%`;
 				} else if (type == 'avatar') {
-					avatarProgressLabel.innerText = `Generating...\t${parseInt(progress * 100)}%`;
+					let adjustedProgress = parseInt(progress * 100);
+					if (adjustedProgress < 10) adjustedProgress += 1;
+					avatarProgressLabel.innerHTML = `Generating... ${adjustedProgress}%`;
+					// avatarProgressLabel.innerHTML = `<div class="animate-pulse">Generating...\t${adjustedProgress}%</div>
+					// 	<br>
+					// 	<div>Generating<span class="after:content-['.'] after:animate-ellipsis"></span>\t${adjustedProgress}%</div>`;
+					// avatarProgressLabel.innerHTML = ``;
 					avatarProgressBar.style.width = `${progress * 100}%`;
 				}
 			}
